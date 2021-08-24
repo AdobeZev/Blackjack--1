@@ -121,7 +121,7 @@ std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers, bo
 
 		if (SpecificCard > Deck.size() - 1)
 		{
-			return "[Error MG::PDC-SC-DS: Too Big]";
+			return "[Error MG::PDC-SC-DS: Too Big " + std::to_string(Deck.size() - 1) + " " + std::to_string(SpecificCard) + "]";
 		}
 		else
 		{
@@ -226,15 +226,20 @@ bool MainGame::RunRound(std::vector<int> *PlayerDeck, std::vector<int> *DealerDe
 		/* Deal First Cards */
 
 		Wait(1.5);
-
 		DealCard(PlayerDeck);
-		std::cout << "Player Deck: " << PrintDeckCards(*PlayerDeck) << std::endl;
+		std::cout << "Player Deck: " << PrintDeckCards(*PlayerDeck);
+		Wait(1);
+		DealCard(PlayerDeck);
+		std::cout << PrintDeckCards(*PlayerDeck, true, false, 1) << std::endl;
 
 		Wait(1.5);
 		std::cout << std::endl;
 
 		DealCard(DealerDeck);
-		std::cout << "Dealer First Card: " << PrintDeckCards(*DealerDeck, true, 0) << std::endl;
+		std::cout << "Dealer First Card: " << PrintDeckCards(*DealerDeck, true, true);
+		Wait(1);
+		DealCard(DealerDeck);
+		std::cout << PrintDeckCards(*DealerDeck, false, true, 1) << std::endl;
 	}
 	else
 	{
