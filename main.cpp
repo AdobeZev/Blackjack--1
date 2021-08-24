@@ -67,6 +67,8 @@ int MainGame::GetDeckAmount(std::vector<int> Deck, bool TrueNumbers)
 int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 {
 
+	if (Deck.size() == 0) { return 2; }
+
 	int TrueDeckAmount = 0;
 	int SoftDeckAmount = 0;
 
@@ -129,18 +131,78 @@ int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 
 };
 
+bool MainGame::ResetDeck(std::vector<int> Deck)
+{
+
+	Deck.clear();
+
+	if (Deck.size() == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
+}
+
+// Round Functions
+
+bool MainGame::RunRound(std::vector<int> PlayerDeck, std::vector<int> DealerDeck, bool Player)
+{
+
+	if (Round == 0)
+	{
+
+		/* Check Decks */
+
+		if (GetDeckAmount(PlayerDeck, true) >= 1)
+		{
+			if (!ResetDeck(PlayerDeck))
+			{
+				return false;
+			}
+		}
+
+		if (GetDeckAmount(PlayerDeck, true) >= 1)
+		{
+			if (!ResetDeck(DealerDeck))
+			{
+				return false;
+			}
+		}
+
+		/* Deal First Cards */
+
+	}
+	else
+	{
+
+		/* Display Total */
+
+	}
+
+};
+
+void MainGame::Wait(double Seconds)
+{
+
+	std::this_thread::sleep_for(std::chrono::duration<double>(Seconds));
+
+}
+
+
 MainGame::MainGame(){};
 
 int main(){
-
-	std::cout << "Hello, World!" << std::endl;
 
 	MainGame Game;
 
 	std::vector<int> PlayerDeck = {11};
 	Game.DealCard(&PlayerDeck);
 
-	std::cout << PlayerDeck[0] << std::endl;
+	std::cout << Game.GetDeckAmount(PlayerDeck, true) << std::endl;
 
 	switch(Game.CheckDeck(PlayerDeck, true))
 	{
