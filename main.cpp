@@ -113,7 +113,7 @@ int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 
 };
 
-std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers, int SpecificCard)
+std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers, bool Dealer, int SpecificCard)
 {
    
 	if (SpecificCard != -1)
@@ -140,7 +140,14 @@ std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers, in
 	{
 		for (int i = 0; i < Deck.size(); i++)
 		{
-			Cards += "[" + std::to_string(Deck[i]) + "]";
+			if (Dealer && i != 0)
+			{
+				Cards += "[X]";
+			}
+			else
+			{
+				Cards += "[" + std::to_string(Deck[i]) + "]";
+			}
 		}
 	}
 	else
@@ -148,18 +155,25 @@ std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers, in
 		for (int i = 0; i < Deck.size(); i++)
 		{
 
-			int number = 0;
-
-			if (Deck[i] == 11)
+			if (Dealer && i != 0)
 			{
-				number = 1;
+				Cards += "[X]";
 			}
 			else
 			{
-				number += Deck[i];
-			}
+				int number = 0;
 
-			Cards += "[" + std::to_string(Deck[i]) + "]";
+				if (Deck[i] == 11)
+				{
+					number = 1;
+				}
+				else
+				{
+					number += Deck[i];
+				}
+
+				Cards += "[" + std::to_string(Deck[i]) + "]";
+			}
 		}
 	}
 
@@ -214,13 +228,13 @@ bool MainGame::RunRound(std::vector<int> *PlayerDeck, std::vector<int> *DealerDe
 		Wait(1.5);
 
 		DealCard(PlayerDeck);
-		std::cout << "Player Deck Amount: " << GetDeckAmount(*PlayerDeck) << std::endl;
+		std::cout << "Player Deck: " << PrintDeckCards(*PlayerDeck) << std::endl;
 
 		Wait(1.5);
 		std::cout << std::endl;
 
 		DealCard(DealerDeck);
-		std::cout << "Dealer Deck Amount: " << GetDeckAmount(*DealerDeck) << std::endl;
+		std::cout << "Dealer First Card: " << PrintDeckCards(*DealerDeck, true, 0) << std::endl;
 	}
 	else
 	{
