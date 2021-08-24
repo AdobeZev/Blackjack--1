@@ -113,6 +113,46 @@ int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 
 };
 
+std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers)
+{
+   
+	// [1][9]
+	std::string Cards = "";
+
+	int TrueNumber = GetDeckAmount(Deck, true);
+	int SoftNumber = GetDeckAmount(Deck);
+
+	if (TrueNumber == SoftNumber || TrueNumber < 22 || TrueNumbers)
+	{
+		for (int i = 0; i < Deck.size(); i++)
+		{
+			Cards += "[" + std::to_string(Deck[i]) + "]";
+		}
+	}
+	else
+	{
+		for (int i = 0; i < Deck.size(); i++)
+		{
+
+			int number = 0;
+
+			if (Deck[i] == 11)
+			{
+				number = 1;
+			}
+			else
+			{
+				number += Deck[i];
+			}
+
+			Cards += "[" + std::to_string(Deck[i]) + "]";
+		}
+	}
+
+	return Cards;
+
+}
+
 bool MainGame::ResetDeck(std::vector<int> *Deck)
 {
 

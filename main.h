@@ -26,6 +26,7 @@ class MainGame
 
 		int GetDeckAmount(std::vector<int> Deck, bool TrueNumbers = false);
 		int CheckDeck(std::vector<int> Deck, bool TrueNumbers = false);
+		std::string PrintDeckCards(std::vector<int> Deck, bool TrueNumbers = false);
 
 		bool ResetDeck(std::vector<int> *Deck);
 
