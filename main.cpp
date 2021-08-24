@@ -69,13 +69,8 @@ int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 
 	if (Deck.size() == 0) { return 2; }
 
-	int TrueDeckAmount = 0;
-	int SoftDeckAmount = 0;
-
-	for (int i = 0; i < Deck.size(); i++)
-	{
-		TrueDeckAmount += Deck[i];
-	};
+	int TrueDeckAmount = GetDeckAmount(Deck, true);
+	int SoftDeckAmount = GetDeckAmount(Deck);
 
 	if (TrueDeckAmount >= 22)
 	{
@@ -86,19 +81,6 @@ int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 		}
 		else
 		{
-
-			for (int i = 0; i < Deck.size(); i++)
-			{
-
-				if (Deck[i] == 11)
-				{
-					SoftDeckAmount += 1;
-				}
-				else
-				{
-					SoftDeckAmount += Deck[i];
-				}
-			};
 
 			if (SoftDeckAmount >= 22)
 			{
@@ -209,7 +191,7 @@ int main(){
 
 	MainGame Game;
 
-	std::vector<int> PlayerDeck = {11};
+	std::vector<int> PlayerDeck = {};
 	std::vector<int> DealerDeck = {};
 
 	Game.RunRound(&PlayerDeck, &DealerDeck);
