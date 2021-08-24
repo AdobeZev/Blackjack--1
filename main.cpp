@@ -113,9 +113,23 @@ int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 
 };
 
-std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers)
+std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers, int SpecificCard)
 {
    
+	if (SpecificCard != -1)
+	{
+
+		if (SpecificCard > Deck.size() - 1)
+		{
+			return "[Error MG::PDC-SC-DS: Too Big]";
+		}
+		else
+		{
+			return "[" + std::to_string(Deck[SpecificCard]) + "]";
+		}
+
+	}
+
 	// [1][9]
 	std::string Cards = "";
 
