@@ -131,12 +131,12 @@ int MainGame::CheckDeck(std::vector<int> Deck, bool TrueNumbers)
 
 };
 
-bool MainGame::ResetDeck(std::vector<int> Deck)
+bool MainGame::ResetDeck(std::vector<int> *Deck)
 {
 
-	Deck.clear();
+	Deck->clear();
 
-	if (Deck.size() == 0)
+	if (Deck->size() == 0)
 	{
 		return true;
 	}
@@ -149,7 +149,7 @@ bool MainGame::ResetDeck(std::vector<int> Deck)
 
 // Round Functions
 
-bool MainGame::RunRound(std::vector<int> PlayerDeck, std::vector<int> DealerDeck, bool Player)
+bool MainGame::RunRound(std::vector<int> *PlayerDeck, std::vector<int> *DealerDeck, bool Player)
 {
 
 	if (Round == 0)
@@ -157,7 +157,7 @@ bool MainGame::RunRound(std::vector<int> PlayerDeck, std::vector<int> DealerDeck
 
 		/* Check Decks */
 
-		if (GetDeckAmount(PlayerDeck, true) >= 1)
+		if (GetDeckAmount(*PlayerDeck, true) >= 1)
 		{
 			if (!ResetDeck(PlayerDeck))
 			{
@@ -165,7 +165,7 @@ bool MainGame::RunRound(std::vector<int> PlayerDeck, std::vector<int> DealerDeck
 			}
 		}
 
-		if (GetDeckAmount(PlayerDeck, true) >= 1)
+		if (GetDeckAmount(*PlayerDeck, true) >= 1)
 		{
 			if (!ResetDeck(DealerDeck))
 			{
@@ -175,6 +175,16 @@ bool MainGame::RunRound(std::vector<int> PlayerDeck, std::vector<int> DealerDeck
 
 		/* Deal First Cards */
 
+		Wait(1.5);
+
+		DealCard(PlayerDeck);
+		std::cout << "Player Deck Amount: " << GetDeckAmount(*PlayerDeck) << std::endl;
+
+		Wait(1.5);
+		std::cout << std::endl;
+
+		DealCard(DealerDeck);
+		std::cout << "Dealer Deck Amount: " << GetDeckAmount(*DealerDeck) << std::endl;
 	}
 	else
 	{
@@ -200,11 +210,11 @@ int main(){
 	MainGame Game;
 
 	std::vector<int> PlayerDeck = {11};
-	Game.DealCard(&PlayerDeck);
+	std::vector<int> DealerDeck = {};
 
-	std::cout << Game.GetDeckAmount(PlayerDeck, true) << std::endl;
+	Game.RunRound(&PlayerDeck, &DealerDeck);
 
-	switch(Game.CheckDeck(PlayerDeck, true))
+	/*switch(Game.CheckDeck(PlayerDeck, true))
 	{
 
 		case 1:
@@ -223,7 +233,7 @@ int main(){
 			std::cout << "Error" << std::endl;
 		break;
 
-	};
+	}; */
 
 	return 0;
 };

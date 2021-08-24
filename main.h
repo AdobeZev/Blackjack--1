@@ -27,11 +27,11 @@ class MainGame
 		int GetDeckAmount(std::vector<int> Deck, bool TrueNumbers = false);
 		int CheckDeck(std::vector<int> Deck, bool TrueNumbers = false);
 
-		bool ResetDeck(std::vector<int> Deck);
+		bool ResetDeck(std::vector<int> *Deck);
 
 		/* Round Function */
 
-		bool RunRound (std::vector<int> Deck, std::vector<int> DealerDeck, bool Player = true);
+		bool RunRound (std::vector<int> *PlayerDeck, std::vector<int> *DealerDeck, bool Player = true);
 
 		/* Timer */
 
