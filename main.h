@@ -39,6 +39,10 @@ class MainGame
 
 		void Wait(double Seconds);
 
+		/* String Functions */
+
+		int CheckString(std::string StringToCheck);
+
 		MainGame();
 
 };

@@ -266,6 +266,9 @@ bool MainGame::RunRound(std::vector<int> *PlayerDeck, std::vector<int> *DealerDe
 				std::cout << "Hit or Stand?: ";
 				std::string choice;
 				std::cin >> choice;
+				std::cin.ignore();
+
+
 
 				break;
 			}
@@ -285,10 +288,21 @@ bool MainGame::RunRound(std::vector<int> *PlayerDeck, std::vector<int> *DealerDe
 
 };
 
+/* Wait Functions */
+
 void MainGame::Wait(double Seconds)
 {
 
 	std::this_thread::sleep_for(std::chrono::duration<double>(Seconds));
+
+}
+
+/* String Functions */
+
+int CheckString(std::string StringToCheck)
+{
+
+
 
 }
 
