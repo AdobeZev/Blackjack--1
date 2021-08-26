@@ -121,7 +121,7 @@ std::string MainGame::PrintDeckCards(std::vector<int> Deck, bool TrueNumbers, bo
 
 		if (SpecificCard > Deck.size() - 1)
 		{
-			return "[Error MG::PDC-SC-DS: Too Big " + std::to_string(Deck.size() - 1) + " " + std::to_string(SpecificCard) + "]";
+			return "[Error MG::PDC-SC-DS: Too Big]" + std::to_string(Deck.size() - 1) + " " + std::to_string(SpecificCard) + "]";
 		}
 		else
 		{
@@ -240,11 +240,46 @@ bool MainGame::RunRound(std::vector<int> *PlayerDeck, std::vector<int> *DealerDe
 		Wait(1);
 		DealCard(DealerDeck);
 		std::cout << PrintDeckCards(*DealerDeck, false, true, 1) << std::endl;
+
+		Round += 1;
 	}
 	else
 	{
 
 		/* Display Total */
+
+		std::cout << "Player Deck: " << PrintDeckCards(*PlayerDeck) << std::endl;
+		std::cout << "Dealer Deck: " << PrintDeckCards(*DealerDeck, false, false) << std::endl;
+
+		std::cout << std::endl;
+		switch(CheckDeck(*PlayerDeck))
+		{
+
+			case 1: // Fumble
+
+				std::cout << "Fumble!" << std::endl;
+				Playing = false;
+
+			break;
+			case 2: // Playing
+			{
+				std::cout << "Hit or Stand?: ";
+				std::string choice;
+				std::cin >> choice;
+
+				break;
+			}
+			case 3: // Winner
+
+				std::cout << "Winner!" << std::endl;
+				Playing = false;
+
+			break;
+			default: // Error
+				std::cout << "[Error: RRSC-CD-PD]" << std::endl;
+			break;
+
+		};
 
 	}
 
